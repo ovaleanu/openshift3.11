@@ -1,0 +1,9 @@
+#!/bin/bash
+
+yes | /bin/cp -rf /etc/sysconfig/network-scripts/contrail.org.ifcfg-ens3 /etc/sysconfig/network-scripts/ifcfg-ens3
+yes | /bin/rm -f /etc/sysconfig/network-scripts/*vhos*
+yes | /bin/rm -f /etc/sysconfig/network-scripts/*vroute*
+systemctl restart network
+modprobe -r vrouter 
+/bin/rm -rf /etc/contrail
+/bin/rm -rf /var/log/contrail

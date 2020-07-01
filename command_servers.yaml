@@ -1,0 +1,56 @@
+command_servers:
+    command:
+        ip: 172.16.125.119
+        connection: ssh
+        ssh_user: root
+        ssh_pass: c0ntrail123
+        sudo_pass: c0ntrail123
+        ntpserver: 17.253.4.253
+
+        # Specify either container_path
+        #container_path: /root/contrail-command-051618.tar
+        # or registry details and container_name
+        # registry_insecure: true
+        container_registry: hub.juniper.net/contrail
+        container_name: contrail-command
+        container_tag: "2003.33"
+        container_registry_username: <Juniper_user_name>
+        container_registry_password: <Juniper_password>
+        config_dir: /etc/contrail
+
+        # contrail command container configurations given here go to /etc/contrail/contrail.yml
+        contrail_config:
+            database:
+                type: postgres
+                dialect: postgres
+                password: contrail123
+                host: localhost
+                user: root
+                password: contrail123
+                name: contrail_test
+            # Log Level
+            log_level: debug
+            # Server configuration
+            server:
+              enabled: true
+              read_timeout: 10
+              write_timeout: 5
+              log_api: true
+              address: ":9091"
+
+              # TLS Configuration
+              tls:
+                  enabled: true
+                  key_file: /usr/share/contrail/ssl/cs-key.pem
+                  cert_file: /usr/share/contrail/ssl/cs-cert.pem
+
+            insecure: true
+            no_auth: true
+            auth_type: basic-auth
+            client:
+              password: contrail123
+            agent:
+              enabled: true
+              backend: file
+              watcher: polling
+              log_level: debug
